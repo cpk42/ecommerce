@@ -1,5 +1,9 @@
+const MongoStore = require('connect-mongo')(session);
+const session = require('express-session');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const express = require('express');
+const bcrypt = require('bcrypt');
 const path = require('path');
 
 //Create express app
