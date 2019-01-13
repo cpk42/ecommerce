@@ -1,0 +1,31 @@
+{
+  "name": "rush00-ecommerce",
+  "version": "1.0.0",
+  "description": "Simple ecommerce app using Mongo, Node, and Express",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "nodemon": "^1.18.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cpk42/ecommerce.git"
+  },
+  "keywords": [
+    "ecommerce",
+    "node",
+    "express",
+    "mongo"
+  ],
+  "author": "ckrommen junwkim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cpk42/ecommerce/issues"
+  },
+  "homepage": "https://github.com/cpk42/ecommerce#readme"
+}
