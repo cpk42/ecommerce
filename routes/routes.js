@@ -3,6 +3,16 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 
+function requiresLogin(req, res, next) {
+  if (req.session && req.session.userId) {
+    return next();
+  } else {
+    var err = new Error('You must be logged in to view this page.');
+    err.status = 401;
+    return res.redirect('/login');
+  }
+}
+
 //Route main page
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "../public/pages/index.html"));
@@ -12,7 +22,23 @@ router.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, "../public/pages/login.html"));
 })
 
-router.post('/login', (req, res) => {
+router.get('/dabs', (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/pages/dabs.html"));
+})
+
+router.get('/flowers', (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/pages/flowers.html"));
+})
+
+router.get('/edibles', (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/pages/edibles.html"));
+})
+
+router.get('/cart', (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/pages/cart.html"));
+})
+
+router.post('/login', (req, res, next) => {
     var body = req.body;
 
     if (req.body.password != req.body.passwordConf) {
@@ -44,6 +70,10 @@ router.post('/login', (req, res) => {
             }
         });
     } else if (req.body.logemail && req.body.logpassword) {
+        console.log(req.body.logemail);
+        console.log(req.body.logpassword);
+        console.log(req.session);
+
         User.authenticate(req.body.logemail, req.body.logpassword, function(error, user) {
             if (error || !user) {
                 var err = new Error('Wrong email or password.');
@@ -63,6 +93,7 @@ router.post('/login', (req, res) => {
 
 // GET route after registering
 router.get('/profile', function(req, res, next) {
+    console.log(req.session);
     User.findById(req.session.userId)
         .exec(function(error, user) {
             if (error) {

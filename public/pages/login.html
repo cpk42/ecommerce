@@ -13,8 +13,7 @@
 			<div id="subheader">
 				<div class="container">
 					<p>All you need to succeed in 42!</p>
-					<a href="#">Login</a>
-					<a href="#">My Cart</a>
+                    <a href="/cart">My Cart</a>
 				</div>
 			</div>
 			<div id="mainheader">
@@ -25,9 +24,9 @@
 			<div id="navigation">
 				<nav>
 					<a href="./index">HOME</a>
-					<a href="#">Flowers</a>
-					<a href="#">Edibles</a>
-					<a href="#">Dabs</a>
+					<a href="/flowers">Flowers</a>
+					<a href="/edibles">Edibles</a>
+					<a href="/dabs">Dabs</a>
 				</nav>
 			</div>
 		</div>
@@ -38,7 +37,7 @@
         <div id="wrapper">
             <div class="table_cell">
                 <h1 id="title">Register</h1>
-                <form method="post" action="/register">
+                <form method="post" action="/login">
                     <input type="text" placeholder="username" name="username">
                     <input type="email" placeholder="email" name="email">
                     <input type="password" placeholder="password" name="password">
@@ -48,9 +47,9 @@
             </div>
             <div class="table_cell">
                 <h1 id="title">Login</h1>
-                <form method="post" action="/register">
-                    <input type="email" placeholder="email" name="logEmail">
-                    <input type="password" placeholder="password" name="password">
+                <form method="post" action="/login">
+                    <input type="email" placeholder="email" name="logemail">
+                    <input type="password" placeholder="password" name="logpassword">
                     <button class="button" type="submit">Login</button>
                 </form>
             </div>

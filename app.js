@@ -4,7 +4,16 @@ const bodyParser = require('body-parser');
 const routes = require('./routes/routes');
 const express = require('express');
 const path = require('path');
+
 const app = express();
+app.use(session({
+    secret: 'work hard',
+    resave: true,
+    saveUninitialized: false
+    // store: new MongoStore({
+    //     mongooseConnection: db
+    // })
+}));
 const port = 3001
 
 // Setting up Mongo session
@@ -25,14 +34,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use('/', routes);
 
-app.use(session({
-    secret: 'work hard',
-    resave: true,
-    saveUninitialized: false,
-    store: new MongoStore({
-        mongooseConnection: db
-    })
-}));
 
 //Listen on port 3001
 app.listen(port, () => {
