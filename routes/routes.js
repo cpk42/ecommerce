@@ -8,7 +8,11 @@ router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "../public/pages/index.html"));
 })
 
-router.post('/', (req, res) => {
+router.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/pages/login.html"));
+})
+
+router.post('/login', (req, res) => {
     var body = req.body;
 
     if (req.body.password != req.body.passwordConf) {
