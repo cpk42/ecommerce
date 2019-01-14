@@ -82,10 +82,10 @@ router.post('/login', (req, res, next) => {
             } else {
                 if (req.session.userId) {
                     console.log('here');
-                    return res.redirect('/');
+                    return res.redirect('/profile');
                 }
                 req.session.userId = user._id;
-                return res.redirect('/');
+                return res.redirect('/profile');
             }
         });
     } else {
@@ -97,8 +97,6 @@ router.post('/login', (req, res, next) => {
 
 // GET route after registering
 router.get('/cart', function(req, res, next) {
-    console.log(req.session.userId);
-    console.log('here');
     User.findById(req.session.userId)
         .exec(function(error, user) {
             if (error) {
@@ -109,7 +107,25 @@ router.get('/cart', function(req, res, next) {
                     err.status = 400;
                     return res.redirect('/login')
                 } else {
-                    return res.redirect('/cart');
+                    res.sendFile(path.join(__dirname, "../public/pages/cart.html"));
+                }
+            }
+        });
+});
+
+// GET route after registering
+router.get('/profile', function(req, res, next) {
+    User.findById(req.session.userId)
+        .exec(function(error, user) {
+            if (error) {
+                return next(error);
+            } else {
+                if (user === null) {
+                    var err = new Error('Not authorized! Go back!');
+                    err.status = 400;
+                    return res.redirect('/login')
+                } else {
+                    res.sendFile(path.join(__dirname, "../public/pages/profile.html"));
                 }
             }
         });
@@ -123,7 +139,7 @@ router.get('/logout', function(req, res, next) {
             if (err) {
                 return next(err);
             } else {
-                return res.redirect('/cart');
+                return res.redirect('/login');
             }
         });
     }
