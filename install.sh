@@ -1,2 +1,2 @@
 printf "Installing Dependencies..."
-yarn
+yarn add bodyParser mongoose express bcrypt path

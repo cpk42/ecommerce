@@ -3,8 +3,41 @@ body {
     height: 100%;
     font-family: Helvetica;
     background-color: white;
+    margin: 0 auto;
 }
 
 #title {
     text-align: center;
 }
+
+input {
+    display: block;
+    margin: 0 auto;
+    /* margin-top: 2%;
+    margin-bottom: 2%; */
+}
+
+#wrapper {
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.table_cell {
+    height: 100%;
+    width: 50%;
+    margin: 0 auto;
+    display: inline-block;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.table_row {
+    width: 100%;
+}
+
+/* * {
+    border: red 2px solid;
+    background-color: black;
+    color: white;
+} */

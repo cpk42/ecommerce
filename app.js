@@ -1,26 +1,40 @@
-const MongoStore = require('connect-mongo')(session);
+// Setting up Express
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+const routes = require('./routes/routes');
 const express = require('express');
-const bcrypt = require('bcrypt');
 const path = require('path');
-
-//Create express app
 const app = express();
 const port = 3001
 
-//Initialize body-parser
-app.use(bodyParser.json());
+// Setting up Mongo session
+const MongoStore = require('connect-mongo')(session);
+const mongoDB = 'mongodb://localhost/users';
+const mongoose = require('mongoose')
+const bcrypt = require('bcrypt');
+const db = mongoose.connection;
 
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+//Initialize body-parser and serve static file public
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use('/', routes);
 
-//Route main page
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "public/pages/index.html"))
-})
+app.use(session({
+    secret: 'work hard',
+    resave: true,
+    saveUninitialized: false,
+    store: new MongoStore({
+        mongooseConnection: db
+    })
+}));
 
-//Listent on port 3001
+//Listen on port 3001
 app.listen(port, () => {
     console.log(`Ecommerce app listening on port ${port}!`)
 })

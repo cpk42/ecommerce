@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <title>Ecommerce</title>
+</head>
+
+<body>
+    <div class="table">
+        <div class="table_row">
+            <div class="table_cell">
+                <h1 id="title">Register</h1>
+                <form method="POST" action="/register">
+                    <input type="text" placeholder="username" name="username">
+                    <input type="email" placeholder="email" name="email">
+                    <input type="password" placeholder="password" name="password">
+                    <input type="password" placeholder="confirm password" name="passwordConf">
+                    <button class="button" type="submit">Register</button>
+                </form>
+            </div>
+            <div class="table_cell">
+                <h1 id="title">Login</h1>
+                <form method="POST" action="/login">
+                    <input type="email" placeholder="email" name="email">
+                    <input type="password" placeholder="password" name="password">
+                    <button class="button" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
