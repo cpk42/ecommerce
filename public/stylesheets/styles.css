@@ -136,4 +136,10 @@ table {
 .addtocart:hover {
   background-color: green;
 }
+#cart {
+	margin-top: 30px;
+	padding: 20px;
+	border: 2px solid;
+	background: lightgreen;
+}
 >>>>>>> 763bf627c252d93e72a7aeffab5360274ba2d0c1
