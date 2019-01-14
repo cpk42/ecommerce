@@ -5,10 +5,10 @@ const path = require('path');
 
 //Route main page
 router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/pages/register.html"));
+    res.sendFile(path.join(__dirname, "../public/pages/index.html"));
 })
 
-router.post('/register', (req, res) => {
+router.post('/', (req, res) => {
     var body = req.body;
 
     if (req.body.password != req.body.passwordConf) {
@@ -33,7 +33,7 @@ router.post('/register', (req, res) => {
         User.create(userData, function(err, user) {
             if (err) {
                 console.log(err);
-                return res.sendFile(path.join(__dirname, "../public/pages/registerError.html"));
+                return res.sendFile(path.join(__dirname, "../public/pages/login.html"));
             } else {
                 console.log(body);
                 return res.redirect('/profile');

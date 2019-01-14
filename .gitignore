@@ -3,3 +3,4 @@ package_lock.json
 .DS_STORE
 ._.DS_STORE
 yarn.lock
+*.swp

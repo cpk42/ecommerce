@@ -3,16 +3,42 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="../stylesheets/styles.css">
     <title>Ecommerce</title>
 </head>
 
 <body>
-    <div class="table">
-        <div class="table_row">
+	<div id="wrapper">
+		<div id="header">
+			<div id="subheader">
+				<div class="container">
+					<p>All you need to succeed in 42!</p>
+					<a href="#">Login</a>
+					<a href="#">My Cart</a>
+				</div>
+			</div>
+			<div id="mainheader">
+				<div id="logo">
+					<span id="ist">42</span><span id="iist">O-shop</span>
+				</div>
+			</div>
+			<div id="navigation">
+				<nav>
+					<a href="./index.html">HOME</a>
+					<a href="#">Flowers</a>
+					<a href="#">Edibles</a>
+					<a href="#">Dabs</a>
+				</nav>
+			</div>
+		</div>
+		</div>
+	</div>
+	&nbsp
+	<form method="POST">
+        <div id="wrapper">
             <div class="table_cell">
                 <h1 id="title">Register</h1>
-                <form method="POST" action="/register">
+                <form method="post" action="/register">
                     <input type="text" placeholder="username" name="username">
                     <input type="email" placeholder="email" name="email">
                     <input type="password" placeholder="password" name="password">
@@ -22,14 +48,13 @@
             </div>
             <div class="table_cell">
                 <h1 id="title">Login</h1>
-                <form method="POST" action="/login">
-                    <input type="email" placeholder="email" name="email">
+                <form method="post" action="/register">
+                    <input type="email" placeholder="email" name="logEmail">
                     <input type="password" placeholder="password" name="password">
                     <button class="button" type="submit">Login</button>
                 </form>
             </div>
         </div>
-    </div>
+    </form>
 </body>
-
 </html>
