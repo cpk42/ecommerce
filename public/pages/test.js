@@ -1,6 +1,6 @@
-itemName = [];
-itemQty = [];
-itemPrice = [];
+var itemName = ["yeet"];
+var itemQty = [10];
+var itemPrice = [500];
 
 function addItem(){
 	itemName.push(document.getElementById('Name').value);

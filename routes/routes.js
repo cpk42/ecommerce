@@ -4,13 +4,13 @@ const router = express.Router();
 const path = require('path');
 
 function requiresLogin(req, res, next) {
-  if (req.session && req.session.userId) {
-    return next();
-  } else {
-    var err = new Error('You must be logged in to view this page.');
-    err.status = 401;
-    return res.redirect('/login');
-  }
+    if (req.session && req.session.userId) {
+        return next();
+    } else {
+        var err = new Error('You must be logged in to view this page.');
+        err.status = 401;
+        return res.redirect('/login');
+    }
 }
 
 //Route main page
@@ -32,10 +32,6 @@ router.get('/flowers', (req, res) => {
 
 router.get('/edibles', (req, res) => {
     res.sendFile(path.join(__dirname, "../public/pages/edibles.html"));
-})
-
-router.get('/cart', (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/pages/cart.html"));
 })
 
 router.post('/login', (req, res, next) => {
@@ -65,8 +61,8 @@ router.post('/login', (req, res, next) => {
                 console.log(err);
                 return res.sendFile(path.join(__dirname, "../public/pages/login.html"));
             } else {
-                console.log(body);
-                return res.redirect('/profile');
+                req.session.userId = user._id;
+                return res.redirect('/');
             }
         });
     } else if (req.body.logemail && req.body.logpassword) {
@@ -80,8 +76,10 @@ router.post('/login', (req, res, next) => {
                 err.status = 401;
                 return next(err);
             } else {
+                if (req.session.userId)
+                    return res.redirect('/');
                 req.session.userId = user._id;
-                return res.redirect('/profile');
+                return res.redirect('/');
             }
         });
     } else {
@@ -92,8 +90,9 @@ router.post('/login', (req, res, next) => {
 })
 
 // GET route after registering
-router.get('/profile', function(req, res, next) {
-    console.log(req.session);
+router.get('/cart', function(req, res, next) {
+    console.log(req.session.userId);
+    console.log('here');
     User.findById(req.session.userId)
         .exec(function(error, user) {
             if (error) {
@@ -102,9 +101,9 @@ router.get('/profile', function(req, res, next) {
                 if (user === null) {
                     var err = new Error('Not authorized! Go back!');
                     err.status = 400;
-                    return next(err);
+                    return res.redirect('/login')
                 } else {
-                    return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+                    return res.redirect('/cart');
                 }
             }
         });
@@ -118,7 +117,7 @@ router.get('/logout', function(req, res, next) {
             if (err) {
                 return next(err);
             } else {
-                return res.redirect('/');
+                return res.redirect('/cart');
             }
         });
     }
