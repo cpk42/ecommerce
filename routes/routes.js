@@ -61,6 +61,10 @@ router.post('/login', (req, res, next) => {
                 console.log(err);
                 return res.sendFile(path.join(__dirname, "../public/pages/login.html"));
             } else {
+                if (req.session.userId) {
+                    console.log('here');
+                    return res.redirect('/');
+                }
                 req.session.userId = user._id;
                 return res.redirect('/');
             }
@@ -76,8 +80,10 @@ router.post('/login', (req, res, next) => {
                 err.status = 401;
                 return next(err);
             } else {
-                if (req.session.userId)
+                if (req.session.userId) {
+                    console.log('here');
                     return res.redirect('/');
+                }
                 req.session.userId = user._id;
                 return res.redirect('/');
             }
